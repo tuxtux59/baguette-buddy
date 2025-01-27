@@ -1,0 +1,32 @@
+<div>
+  <div>
+  <p style="color: green"><%= notice %></p>
+
+  <div class="lg:flex lg:items-center lg:justify-between pr-16 mb-6">
+    <div class="min-w-0 flex-1">
+      <h2 class="text-2xl/7 font-bold text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">Receipes</h2>
+    </div>
+    <div class="mt-5 flex lg:mt-0 lg:ml-4">
+      <%= link_to(new_receipe_path, class: 'cursor-pointer') do %>
+        <span class="sm:ml-3 cursor-pointer">
+          <button type="button" class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mr-1.5 -ml-0.5 size-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+
+            New Receipe
+          </button>
+        </span>
+      <% end %>
+    </div>
+  </div>
+  </div>
+  <div id="receipes" class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
+    <% @receipes.each do |receipe| %>
+      <%= link_to(receipe, class: 'max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 bg-gray hover:border hover:border-white hover:scale-102 duration-700') do %>
+        <%= render "receipes/receipe_card", receipe: receipe %>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>
