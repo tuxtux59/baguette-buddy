@@ -1,7 +1,7 @@
 class Receipe < ApplicationRecord
   belongs_to :user
 
-  validates :title, presence: true
+  validates :title, presence: true, uniqueness: true
   validates :description, presence: true
   validates :portions_number, numericality: {greater_than_or_equal_to: 1}
 
