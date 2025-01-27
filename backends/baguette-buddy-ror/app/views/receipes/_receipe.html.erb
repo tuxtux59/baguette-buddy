@@ -9,8 +9,6 @@
       <div
         class="data w-full lg:pr-8 pr-0 xl:justify-start justify-center flex items-center max-lg:pb-10 xl:my-2 lg:my-5 my-0">
         <div class="data w-full max-w-xl">
-          <%# <p class="text-lg font-medium leading-8 text-indigo-600 mb-4">Clothing&nbsp; /&nbsp; Menswear
-          </p> %>
           <h2 class="font-manrope font-bold text-3xl leading-10 text-gray-900 mb-2 capitalize">
             <%= @receipe.title %>
           </h2>
@@ -100,7 +98,7 @@
             </button>
           </div>
           <p class="text-gray-500 text-base font-normal my-5">
-            <%= @receipe.description %>
+            <%= description_as_html(@receipe.description) %>
             <a href="#" class="text-indigo-600">More....</a>
           </p>
         </div>

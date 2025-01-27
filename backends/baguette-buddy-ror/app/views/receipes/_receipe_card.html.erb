@@ -1,5 +1,5 @@
 <div id="<%= dom_id receipe %>" class="receipe-card">
-  <%= image_tag("data:#{receipe.image_type};base64, #{Base64.encode64(receipe.illustration.to_s)}", alt: 'illustration', class: 'rounded-t-lg h-48 w-full object-cover') %>
+  <%= image_tag(receipe.base64_data, alt: 'illustration', class: 'rounded-t-lg h-48 w-full object-cover') %>
   <div class="p-5">
     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
       <%= receipe.title %>
@@ -10,7 +10,7 @@
     </span>
 
     <p class="my-3 font-normal text-gray-200 dark:text-gray-200">
-      <%= receipe.description %>
+      <%= description_as_html(receipe.description.truncate(100, separator: ' ', ommission: '...')) %>
     </p>
 
     <p class="text-xs">

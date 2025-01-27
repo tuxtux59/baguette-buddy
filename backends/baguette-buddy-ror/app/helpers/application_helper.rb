@@ -9,6 +9,7 @@ module ApplicationHelper
     max_dimension = 800
     image.resize "#{max_dimension}x#{max_dimension}>"
     image.quality "85"
+    image.format "png"
     logger.debug "to #{image.width}x#{image.height}"
     return image.to_blob
   end

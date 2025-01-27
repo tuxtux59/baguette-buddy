@@ -10,7 +10,14 @@ class Receipe < ApplicationRecord
   end
 
   def image_type
-    return image_content_type(self.base64_content)
+    image_content_type(self.base64_content)
+  end
+
+  def base64_data
+    data = "data:#{self.image_type};base64, #{self.base64_content}"
+    puts "base64_data"
+    puts data[0..40]
+    return data
   end
 
   private
