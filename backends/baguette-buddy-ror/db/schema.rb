@@ -10,33 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_25_154716) do
+ActiveRecord::Schema[7.1].define(version: 2025_01_27_194158) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "ingredients", force: :cascade do |t|
+  create_table "product_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.binary "image"
-    t.bigint "unit_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_ingredients_on_name", unique: true
-    t.index ["unit_id"], name: "index_ingredients_on_unit_id"
+    t.uuid "unit_id"
+    t.index ["name"], name: "index_product_items_on_name", unique: true
+    t.index ["unit_id"], name: "index_product_items_on_unit_id"
   end
 
-  create_table "receipes", force: :cascade do |t|
+  create_table "receipes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
-    t.bigint "user_id", null: false
     t.integer "portions_number", default: 1, null: false
     t.binary "illustration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "user_id"
     t.index ["title"], name: "index_receipes_on_title", unique: true
     t.index ["user_id"], name: "index_receipes_on_user_id"
   end
 
-  create_table "units", force: :cascade do |t|
+  create_table "units", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "plural"
     t.string "abbreviation"
@@ -47,7 +48,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_25_154716) do
     t.index ["name"], name: "index_units_on_name", unique: true
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "username"
     t.string "email"
     t.string "password_digest"
@@ -58,6 +59,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_25_154716) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  add_foreign_key "ingredients", "units"
+  add_foreign_key "product_items", "units"
   add_foreign_key "receipes", "users"
 end
