@@ -61,8 +61,14 @@ class ReceipesController < ApplicationController
   end
 
   private
+    # Allow fetching receipe either by id or slug
     def set_receipe
-      @receipe = Receipe.find(params[:id])
+      identifier = params[:id]
+      if identifier.to_s.match /^\h{8}-(\h{4}-){3}\h{12}$/
+        @receipe = Receipe.find(identifier)
+      else
+        @receipe = Receipe.find_by(slug: identifier)
+      end
     end
 
     def receipe_params

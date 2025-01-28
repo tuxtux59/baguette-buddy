@@ -1,7 +1,9 @@
 class Receipe < ApplicationRecord
+  before_validation :generate_slug
   belongs_to :user
 
   validates :title, presence: true, uniqueness: true
+  validates :slug, presence: true, uniqueness: true
   validates :description, presence: true
   validates :portions_number, numericality: {greater_than_or_equal_to: 1}
 
@@ -15,12 +17,14 @@ class Receipe < ApplicationRecord
 
   def base64_data
     data = "data:#{self.image_type};base64, #{self.base64_content}"
-    puts "base64_data"
-    puts data[0..40]
     return data
   end
 
   private
+
+  def generate_slug
+    self.slug = self.title.parameterize.underscore if self.title
+  end
 
   IMAGE_SIGNATURES = {
     R0lGODdh: 'image/gif',

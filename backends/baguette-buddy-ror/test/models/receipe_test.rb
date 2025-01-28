@@ -33,4 +33,12 @@ class ReceipeTest < ActiveSupport::TestCase
     assert_not receipe2.valid?
     assert_includes(receipe2.errors[:title], "has already been taken")
   end
+
+  test "slug is created from title" do
+    user = User.create(username: "user2", email: "user2@example.com", password_digest: "hashed")
+    receipe = Receipe.create!(title: "4 plates Paëlla", description: "Description", user: user)
+
+    assert receipe.valid?
+    assert_equal "4_plates_paella", receipe.slug
+  end
 end

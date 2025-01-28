@@ -2,7 +2,9 @@ require "test_helper"
 
 class ReceipesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @receipe = receipes(:one)
+    @user = User.create(username: "user2", email: "user2@example.com", password: "password")
+    @receipe =  Receipe.create!(title: "4 plates Paëlla", description: "Description", user: @user)
+    post login_path, params: { user: { email: @user.email, password: "password" } }
   end
 
   test "should get index" do
@@ -17,7 +19,13 @@ class ReceipesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create receipe" do
     assert_difference("Receipe.count") do
-      post receipes_url, params: { receipe: { description: @receipe.description, illustration: @receipe.illustration, portions_number: @receipe.portions_number, title: @receipe.title, user_id: @receipe.user_id } }
+      post receipes_url, params: { 
+        receipe: { 
+          description: "description",
+          title: "Some receipe name",
+          user_id: @user.id
+        }
+      }
     end
 
     assert_redirected_to receipe_url(Receipe.last)
@@ -25,6 +33,11 @@ class ReceipesControllerTest < ActionDispatch::IntegrationTest
 
   test "should show receipe" do
     get receipe_url(@receipe)
+    assert_response :success
+  end
+
+  test "should show receipe using receipe's slug" do
+    get receipe_url(@receipe.slug)
     assert_response :success
   end
 
