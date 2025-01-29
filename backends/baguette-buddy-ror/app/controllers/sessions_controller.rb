@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(email: params[:user][:email].downcase)
+    @user = find_user(params)
     if @user && @user.authenticate(params[:user][:password])
       reset_session
       session[:current_user_id] = @user.id
@@ -17,5 +17,17 @@ class SessionsController < ApplicationController
   def destroy
     reset_session
     redirect_to root_url
+  end
+
+  private
+
+  def find_user(params)
+    email_or_username = params[:user][:email_or_username].strip
+    puts email_or_username
+    if email_or_username.match?(URI::MailTo::EMAIL_REGEXP)
+      @user = User.find_by(email: email_or_username.downcase)
+    else
+      @user = User.find_by(username: email_or_username)
+    end
   end
 end
