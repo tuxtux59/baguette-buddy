@@ -1,15 +1,17 @@
-<h1>Welcome</h1>
-<p class="notice"><%= notice %></p>
-<nav>
+<div class="h-screen">
+  <h1>Welcome</h1>
+  <p class="notice"><%= notice %></p>
+  <nav>
 
-  <ul class="list-unstyled">
-    <% if user_signed_in? %>
-    <li>
-      <%= button_to "Logout", logout_path, method: :delete %>
-    </li>
-    <% else %>
-        <li><%= link_to 'Sign up', sign_up_path %></li>
-        <li><%= link_to 'Login', login_path %></li>
-    <% end %>
-  </ul>
-</nav>
+    <ul class="list-unstyled">
+      <% if user_signed_in? %>
+      <li>
+        <%= button_to "Logout", logout_path, method: :delete %>
+      </li>
+      <% else %>
+          <li><%= link_to 'Sign up', sign_up_path %></li>
+          <li><%= link_to 'Login', login_path %></li>
+      <% end %>
+    </ul>
+  </nav>
+</div>
