@@ -7,6 +7,7 @@ class Receipe < ApplicationRecord
   validates :slug, presence: true, uniqueness: true
   validates :description, presence: true
   validates :portions_number, numericality: {greater_than_or_equal_to: 1}
+  validates :cooking_time, numericality: {greater_than_or_equal_to: 1}
 
   def base64_content
     Base64.encode64(self.illustration.to_s)

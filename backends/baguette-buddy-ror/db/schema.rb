@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_30_140234) do
+ActiveRecord::Schema[7.1].define(version: 2025_01_31_145637) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -25,7 +25,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_30_140234) do
   create_table "ingredients", force: :cascade do |t|
     t.uuid "receipe_id", null: false
     t.uuid "product_item_id", null: false
-    t.integer "quantity", default: 1, null: false
+    t.decimal "quantity", precision: 6, scale: 2, default: "1.0", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_item_id"], name: "index_ingredients_on_product_item_id"
@@ -52,6 +52,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_30_140234) do
     t.datetime "updated_at", null: false
     t.uuid "user_id"
     t.string "slug"
+    t.integer "cooking_time", default: 1
     t.index ["slug"], name: "index_receipes_on_slug", unique: true
     t.index ["title"], name: "index_receipes_on_title", unique: true
     t.index ["user_id"], name: "index_receipes_on_user_id"
