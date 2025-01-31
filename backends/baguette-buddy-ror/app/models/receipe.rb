@@ -1,6 +1,7 @@
 class Receipe < ApplicationRecord
   before_validation :generate_slug
   belongs_to :user
+  has_many :ingredients
 
   validates :title, presence: true, uniqueness: true
   validates :slug, presence: true, uniqueness: true

@@ -75,35 +75,6 @@
     margin-bottom: 0.5em;
   }
 
-  /* Tables */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 1.5em;
-    color: #ddd;
-    border-radius: 8px;
-  }
-
-  th,
-  td {
-    border: 1px solid #aaa;
-    padding: 8px;
-    text-align: left;
-  }
-
-  th {
-    background-color: #444;
-    font-weight: bold;
-  }
-
-  tr:nth-child(even) {
-    background-color: #555;
-  }
-
-  tr:hover {
-    background-color: #666;
-  }
-
   /* Code Blocks */
   pre {
     background-color: #f4f4f4;
@@ -127,13 +98,42 @@
     margin-bottom: 1.5em;
   }
 
-  /* Images */
-  .description > p > img {
-    max-width: 100%;
+  .description {
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5em;
+      color: #ddd;
+      border-radius: 8px;
+    }
+
+    th,
+    td {
+      border: 1px solid #aaa;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #444;
+      font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+      background-color: #555;
+    }
+
+    tr:hover {
+      background-color: #666;
+    }
+
+    img {
+       max-width: 100%;
     max-height: 8rem;
     display: block;
     border-radius: 10px !important;
     margin: 2rem auto;
+    }
   }
 
   figcaption {

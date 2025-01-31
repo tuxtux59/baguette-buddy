@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_29_184416) do
+ActiveRecord::Schema[7.1].define(version: 2025_01_30_140234) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -20,6 +20,17 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_29_184416) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index "lower((name)::text)", name: "index_categories_on_lower_name", unique: true
+  end
+
+  create_table "ingredients", force: :cascade do |t|
+    t.uuid "receipe_id", null: false
+    t.uuid "product_item_id", null: false
+    t.integer "quantity", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_item_id"], name: "index_ingredients_on_product_item_id"
+    t.index ["receipe_id", "product_item_id"], name: "index_ingredients_on_receipe_id_and_product_item_id", unique: true
+    t.index ["receipe_id"], name: "index_ingredients_on_receipe_id"
   end
 
   create_table "product_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -68,6 +79,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_29_184416) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "ingredients", "product_items"
+  add_foreign_key "ingredients", "receipes"
   add_foreign_key "product_items", "units"
   add_foreign_key "receipes", "users"
 end
