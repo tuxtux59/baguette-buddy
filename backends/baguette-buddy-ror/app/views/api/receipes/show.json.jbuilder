@@ -1,1 +1,1 @@
-json.partial! "receipes/receipe", receipe: @receipe
+json.partial! "api/receipes/receipe", receipe: @receipe
