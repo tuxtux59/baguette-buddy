@@ -12,6 +12,10 @@ The main purpose here is to focus on two main improvements about **Grocy**:
 
 Secondly is to offer two options for both ends
 
-1. Backend on Ruby on Rails (ROR) or Elixir (Erl)
-2. Frontend with ReactJS and React Native (RN).
-
+1. Backend
+   a. on [Ruby on Rails](/backends/baguette-buddy-ror/) (RoR)
+   b. or [Elixir](/backends/elixir/) (Erl)
+   c. or [Node JS](/backends/node/)
+2. Frontend with
+   1. SolidJS
+   2. or React Native
