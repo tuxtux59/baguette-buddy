@@ -4,7 +4,6 @@ class Api::IngredientsController < ApplicationController
 
   # GET /api/recipes
   def index
-    puts Ingredient.all
     @ingredients = Ingredient.all
   end
 

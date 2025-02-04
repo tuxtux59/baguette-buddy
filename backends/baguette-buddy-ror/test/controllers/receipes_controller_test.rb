@@ -4,7 +4,7 @@ class ReceipesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = User.create(username: "user2", email: "user2@example.com", password: "password")
     @receipe =  Receipe.create!(title: "4 plates Paëlla", description: "Description", user: @user)
-    post login_path, params: { user: { email: @user.email, password: "password" } }
+    post login_path, params: { user: { email_or_username: @user.email, password: "password" } }
   end
 
   test "should get index" do
@@ -31,6 +31,12 @@ class ReceipesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to receipe_url(Receipe.last)
   end
 
+  test "should return error when wrong creation params" do
+    post receipes_url, params: { receipe: {user_id: @user.id}}
+
+    assert_response :unprocessable_entity
+  end
+  
   test "should show receipe" do
     get receipe_url(@receipe)
     assert_response :success
@@ -49,6 +55,11 @@ class ReceipesControllerTest < ActionDispatch::IntegrationTest
   test "should update receipe" do
     patch receipe_url(@receipe), params: { receipe: { description: @receipe.description, illustration: @receipe.illustration, portions_number: @receipe.portions_number, title: @receipe.title, user_id: @receipe.user_id } }
     assert_redirected_to receipe_url(@receipe)
+  end
+  
+  test "should render error when update receipe with wrong params" do
+    patch receipe_url(@receipe), params: { receipe: { portions_number: 0 } }
+    assert_response :unprocessable_entity
   end
 
   test "should destroy receipe" do

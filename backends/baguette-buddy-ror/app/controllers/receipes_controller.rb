@@ -56,22 +56,19 @@ class ReceipesController < ApplicationController
     end
   end
 
-  def base64_content(receipe)
-    Base64.encode64(receipe.illustration.to_s)
+  private
+
+  # Allow fetching receipe either by id or slug
+  def set_receipe
+    identifier = params[:id]
+    if identifier.to_s.match /^\h{8}-(\h{4}-){3}\h{12}$/
+      @receipe = Receipe.find(identifier)
+    else
+      @receipe = Receipe.find_by(slug: identifier)
+    end
   end
 
-  private
-    # Allow fetching receipe either by id or slug
-    def set_receipe
-      identifier = params[:id]
-      if identifier.to_s.match /^\h{8}-(\h{4}-){3}\h{12}$/
-        @receipe = Receipe.find(identifier)
-      else
-        @receipe = Receipe.find_by(slug: identifier)
-      end
-    end
-
-    def receipe_params
-      params.require(:receipe).permit(:title, :description, :user_id, :portions_number, :illustration)
-    end
+  def receipe_params
+    params.require(:receipe).permit(:title, :description, :user_id, :portions_number, :illustration)
+  end
 end

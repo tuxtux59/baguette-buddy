@@ -1,6 +1,6 @@
 class Api::ReceipesController < ApplicationController
   before_action :set_receipe, only: %i[ show update destroy ]
-  skip_before_action :verify_authenticity_token #, only: [:create]
+  skip_before_action :verify_authenticity_token
 
   # GET /api/recipes
   def index

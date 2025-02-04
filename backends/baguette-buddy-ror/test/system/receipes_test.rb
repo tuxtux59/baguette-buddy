@@ -24,7 +24,6 @@ class ReceipesTest < ApplicationSystemTestCase
     visit receipes_url
 
     click_on "New Receipe"
-    puts @receipe
 
     fill_in "Description", with: @receipe[:description]
     fill_in "Portions number", with: @receipe[:portions_number]

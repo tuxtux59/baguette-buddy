@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
     return if request.path.starts_with?('/api')
     
     if !request.path.in?(['/', '/login', '/sign_up']) && !user_signed_in?
-      puts "path =#{request.path}"
       if request.format.html?
         redirect_to root_path, notice: "Please sign in to continue."
       elsif request.format.json?

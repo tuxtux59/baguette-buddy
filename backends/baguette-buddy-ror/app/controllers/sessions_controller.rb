@@ -23,7 +23,6 @@ class SessionsController < ApplicationController
 
   def find_user(params)
     email_or_username = params[:user][:email_or_username].strip
-    puts email_or_username
     if email_or_username.match?(URI::MailTo::EMAIL_REGEXP)
       @user = User.find_by(email: email_or_username.downcase)
     else
