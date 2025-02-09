@@ -2,6 +2,7 @@ import React from 'react';
 import { SafeAreaView, ScrollView } from 'react-native';
 import { Button, Divider, List, Text, TextInput } from 'react-native-paper';
 import { useBaguetteBuddy } from '../contexts/BaguetteBuddyProvider';
+import BuyMeACoffeeButton from '../components/BuyMeACoffeeButton';
 
 const Settings = ({ }): React.JSX.Element => {
   const { setUser } = useBaguetteBuddy();
@@ -20,6 +21,7 @@ const Settings = ({ }): React.JSX.Element => {
             right={<TextInput.Icon icon="web" />}
           />
           <Divider style={{ marginVertical: 8, marginHorizontal: 12 }} />
+          <BuyMeACoffeeButton />
         </List.Section>
         <Button
           onPress={() => setUser(null)}
