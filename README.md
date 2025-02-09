@@ -2,7 +2,7 @@
 
 Best fullstack web app mate for cooking and groceries
 
-Quite inspired by [Grocy](grocy.info).
+Quite inspired by [Grocy](https://grocy.info).
 
 The main purpose here is to focus on two main improvements about **Grocy**:
 
@@ -18,4 +18,4 @@ Secondly is to offer two options for both ends
    3. or [Node JS](/backends/node/)
 2. Frontend with
    1. SolidJS
-   2. or React Native
+   2. or [React Native](/frontends/react-native/)
