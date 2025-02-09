@@ -1,4 +1,5 @@
-json.extract! ingredient, :receipe_id, :product_item_id, :quantity
+json.extract! ingredient, :receipe_id, :product_item_id #, :quantity
+json.quantity ingredient.quantity.to_f
 json.receipe do
   json.extract! ingredient.receipe, :id, :title
 end

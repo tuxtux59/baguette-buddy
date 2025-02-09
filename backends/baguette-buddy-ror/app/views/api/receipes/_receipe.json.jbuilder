@@ -4,7 +4,7 @@ json.ingredients receipe.ingredients do |ingredient|
   json.unit do
     json.extract! ingredient.product_item.unit, :name, :plural, :abbreviation
   end
-  json.quantity ingredient.quantity
+  json.quantity ingredient.quantity.to_f
 end
 json.url receipe_url(receipe, format: :json)
 json.image receipe.base64_content
